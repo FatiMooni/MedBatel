@@ -1,5 +1,10 @@
 export default data = [
   {
+    id: 2,
+    title: 'All',
+    icon: '',
+  },
+  {
     id: 0,
     title: 'Clothes',
     icon: '',
@@ -41,7 +46,7 @@ export default data = [
   },
   {
     id: 10,
-    title: 'Objects',
+    title: 'Object',
     icon: '',
   },
 ];

@@ -4,12 +4,14 @@ import OfferItem from '../components/OfferItem';
 import OfferList from '../components/OfferList';
 import {Chip} from 'react-native-paper';
 import data from '../helper/categoriesData';
+import {offers} from '../helper/offersData';
 
 class OffersScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       categories: [],
+      offers: [],
       selectedCategory: null,
     };
   }
@@ -17,17 +19,32 @@ class OffersScreen extends Component {
   componentDidMount() {
     this.setState({
       categories: [...this.state.categories, ...data],
+      offers: [...this.state.offers, ...offers],
     });
   }
 
   selectThisCategory(item) {
-    data.filter((el) => {
-      el.category != item.title;
-    });
-    console.log(data);
-    this.setState({
-      selectedCategory: item.id,
-    });
+    this.setState(
+      {
+        selectedCategory: item,
+      },
+      () => {
+        this._loadOffers();
+      },
+    );
+  }
+
+  _loadOffers() {
+    if (this.state.selectedCategory.title === 'All') {
+      this.setState({offers: offers});
+      return;
+    }
+    //in future it will include a back end call
+    let items = offers.filter(
+      (el) => el.category === this.state.selectedCategory.title,
+    );
+    this.setState({offers: items});
+    console.log(items);
   }
 
   _displayCategoriesList() {
@@ -46,7 +63,9 @@ class OffersScreen extends Component {
             onDelete={() => {}}
             style={{backgroundColor: '#4ECDC415'}}
             selectedColor="#fc5c65"
-            selected={item.id === this.state.selectedCategory ? true : false}
+            selected={
+              item.id === this.state.selectedCategory?.id ? true : false
+            }
             onPress={() => this.selectThisCategory(item)}>
             {item.title}
           </Chip>
@@ -69,7 +88,7 @@ class OffersScreen extends Component {
           }}>
           {this._displayCategoriesList()}
         </ScrollView>
-        <OfferList />
+        <OfferList offers={this.state.offers} />
       </View>
     );
   }
