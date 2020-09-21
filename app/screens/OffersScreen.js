@@ -77,13 +77,11 @@ class OffersScreen extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Text>Screen Profile</Text>
         <ScrollView
           horizontal={true}
           style={{
             flexDirection: 'row',
             backgroundColor: 'white',
-            marginTop: 5,
             marginHorizontal: 5,
           }}>
           {this._displayCategoriesList()}
