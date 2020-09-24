@@ -7,9 +7,13 @@ class OfferItem extends React.Component {
     this.state = {};
   }
   render() {
-    const {offer} = this.props;
+    const {offer, _displayDetailsOfOffer} = this.props;
     return (
-      <TouchableOpacity style={Styles.item_container} onPress={() => {}}>
+      <TouchableOpacity
+        style={Styles.item_container}
+        onPress={() => {
+          _displayDetailsOfOffer();
+        }}>
         <Image style={Styles.image} source={{uri: offer.url}} />
         <View style={Styles.content}>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>

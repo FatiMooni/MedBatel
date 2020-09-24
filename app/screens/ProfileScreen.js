@@ -56,7 +56,9 @@ class ProfileScreen extends Component {
             />
           </View>
           <CustomButton
-            onPress={() => {}}
+            onPress={() => {
+              this.props.navigation.navigate('My offers');
+            }}
             title={'My current offers'}
             iconName={'list'}
           />

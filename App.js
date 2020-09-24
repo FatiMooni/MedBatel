@@ -12,6 +12,8 @@ import Store from './app/store/storeConfig';
 import AddOfferScreen from './app/screens/AddOfferScreen';
 import ProfileScreen from './app/screens/ProfileScreen';
 import OffersScreen from './app/screens/OffersScreen';
+import MyOffersScreen from './app/screens/MyOffersScreen';
+import OfferDetailsScreen from './app/screens/OfferDetailsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -20,6 +22,7 @@ function MainStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Offers" component={OffersScreen} />
+      <Stack.Screen name="Details" component={OfferDetailsScreen} />
     </Stack.Navigator>
   );
 }
@@ -27,7 +30,9 @@ function MainStack() {
 function ProfileStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="My Prrofile" component={ProfileScreen} />
+      <Stack.Screen name="My Profile" component={ProfileScreen} />
+      <Stack.Screen name="My offers" component={MyOffersScreen} />
+      <Stack.Screen name="Details" component={OfferDetailsScreen} />
     </Stack.Navigator>
   );
 }
@@ -36,6 +41,7 @@ function AddStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Add Offer" component={AddOfferScreen} />
+      <Stack.Screen name="Details" component={OfferDetailsScreen} />
     </Stack.Navigator>
   );
 }

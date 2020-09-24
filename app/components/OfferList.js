@@ -8,6 +8,10 @@ class OfferList extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    console.log(this.props.offers?.length);
+  }
+
   _renderEmptyContainer() {
     return (
       <View
@@ -29,6 +33,10 @@ class OfferList extends Component {
     );
   }
 
+  _displayDetailsOfOffer = () => {
+    this.props.navigation.navigate('Details');
+  };
+
   render() {
     return (
       <View style={{flex: 99}}>
@@ -37,7 +45,12 @@ class OfferList extends Component {
           data={this.props.offers}
           keyExtractor={(item) => item.id.toString()}
           ListEmptyComponent={this._renderEmptyContainer()}
-          renderItem={({item}) => <OfferItem offer={item} />}
+          renderItem={({item}) => (
+            <OfferItem
+              offer={item}
+              _displayDetailsOfOffer={this._displayDetailsOfOffer}
+            />
+          )}
         />
       </View>
     );
