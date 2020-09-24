@@ -5,6 +5,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import {createStackNavigator} from '@react-navigation/stack';
+import {Provider} from 'react-redux';
+import Store from './app/store/storeConfig';
 
 //screens
 import AddOfferScreen from './app/screens/AddOfferScreen';
@@ -40,35 +42,37 @@ function AddStack() {
 
 export default function App() {
   return (
-    <NavigationContainer style={styles.container}>
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
-            let iconName;
+    <Provider store={Store}>
+      <NavigationContainer style={styles.container}>
+        <Tab.Navigator
+          screenOptions={({route}) => ({
+            tabBarIcon: ({focused, color, size}) => {
+              let iconName;
 
-            if (route.name === 'Profile') {
-              iconName = focused ? 'user' : 'user-o';
-            } else if (route.name === 'Offers') {
-              iconName = focused ? 'list' : 'list-alt';
-            } else if (route.name === 'New Offer') {
-              iconName = focused ? 'plus-square' : 'plus-square-o';
-            }
+              if (route.name === 'Profile') {
+                iconName = focused ? 'user' : 'user-o';
+              } else if (route.name === 'Offers') {
+                iconName = focused ? 'list' : 'list-alt';
+              } else if (route.name === 'New Offer') {
+                iconName = focused ? 'plus-square' : 'plus-square-o';
+              }
 
-            // You can return any component that you like here!
-            return (
-              <FontAwesomeIcon name={iconName} size={size} color={color} />
-            );
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: '#fc5c65',
-          inactiveTintColor: 'gray',
-        }}>
-        <Tab.Screen name="Offers" component={MainStack} />
-        <Tab.Screen name="New Offer" component={AddStack} />
-        <Tab.Screen name="Profile" component={ProfileStack} />
-      </Tab.Navigator>
-    </NavigationContainer>
+              // You can return any component that you like here!
+              return (
+                <FontAwesomeIcon name={iconName} size={size} color={color} />
+              );
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: '#fc5c65',
+            inactiveTintColor: 'gray',
+          }}>
+          <Tab.Screen name="Offers" component={MainStack} />
+          <Tab.Screen name="New Offer" component={AddStack} />
+          <Tab.Screen name="Profile" component={ProfileStack} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 

@@ -42,9 +42,7 @@ class AddOfferScreen extends Component {
       } else {
         console.log('Photo : ', response.uri);
         let requireSource = {uri: response.uri};
-        // On crée une action avec l'image prise et on l'envoie au store Redux
-        // const action = { type: "SET_AVATAR", value: requireSource }
-        // this.props.dispatch(action)
+
         this.setState({
           img_url: requireSource,
         });
