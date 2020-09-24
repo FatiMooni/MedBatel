@@ -15,7 +15,10 @@ class MyOffersScreen extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <OfferList offers={this.props.offers} />
+        <OfferList
+          offers={this.props.offers}
+          navigation={this.props.navigation}
+        />
       </View>
     );
   }

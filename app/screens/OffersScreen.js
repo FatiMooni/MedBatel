@@ -86,7 +86,10 @@ class OffersScreen extends Component {
           }}>
           {this._displayCategoriesList()}
         </ScrollView>
-        <OfferList offers={this.state.offers} />
+        <OfferList
+          offers={this.state.offers}
+          navigation={this.props.navigation}
+        />
       </View>
     );
   }

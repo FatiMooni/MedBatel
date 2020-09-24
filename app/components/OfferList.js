@@ -33,8 +33,8 @@ class OfferList extends Component {
     );
   }
 
-  _displayDetailsOfOffer = () => {
-    this.props.navigation.navigate('Details');
+  _displayDetailsOfOffer = (item) => {
+    this.props.navigation.navigate('Details', {offer: item});
   };
 
   render() {

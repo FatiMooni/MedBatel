@@ -12,7 +12,7 @@ class OfferItem extends React.Component {
       <TouchableOpacity
         style={Styles.item_container}
         onPress={() => {
-          _displayDetailsOfOffer();
+          _displayDetailsOfOffer(offer);
         }}>
         <Image style={Styles.image} source={{uri: offer.url}} />
         <View style={Styles.content}>
