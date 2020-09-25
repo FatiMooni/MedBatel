@@ -14,7 +14,7 @@ class OfferItem extends React.Component {
         onPress={() => {
           _displayDetailsOfOffer(offer);
         }}>
-        <Image style={Styles.image} source={{uri: offer.url}} />
+        <Image style={Styles.image} source={offer.url} />
         <View style={Styles.content}>
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>
             {offer.offer_title}

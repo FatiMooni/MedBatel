@@ -23,6 +23,7 @@ function MainStack() {
     <Stack.Navigator>
       <Stack.Screen name="Offers" component={OffersScreen} />
       <Stack.Screen name="Details" component={OfferDetailsScreen} />
+      <Stack.Screen name="My offers" component={MyOffersScreen} />
     </Stack.Navigator>
   );
 }

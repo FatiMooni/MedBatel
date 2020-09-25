@@ -9,6 +9,8 @@ class OfferDetailsScreen extends Component {
     super(props);
     this.state = {};
   }
+
+  
   render() {
     const {offer} = this.props.route.params;
     console.log(offer);
@@ -16,7 +18,7 @@ class OfferDetailsScreen extends Component {
       <View style={{flex: 1, backgroundColor: 'white'}}>
         <TouchableHighlight
           style={{elevation: 15, height: 300, width: '100%', zIndex: 15}}>
-          <Image source={{uri: offer.url}} style={styles.offerImg} />
+          <Image source={offer.url} style={styles.offerImg} />
         </TouchableHighlight>
         <View
           style={{

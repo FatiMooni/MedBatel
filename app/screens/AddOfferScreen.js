@@ -15,6 +15,7 @@ import {
   DefaultTheme,
 } from 'react-native-paper';
 import ImagePicker from 'react-native-image-picker';
+import {useDispatch, connect} from 'react-redux';
 
 const theme = {
   ...DefaultTheme,
@@ -29,8 +30,38 @@ const theme = {
 class AddOfferScreen extends Component {
   constructor(props) {
     super(props);
-    this.state = {img_url: null};
+    this.state = {img_url: null, title: null, place: null, category: null};
     this._selectPicture = this._selectPicture.bind(this);
+  }
+
+  _resetFields() {
+    this.setState({
+      img_url: null,
+      title: null,
+      place: null,
+      category: null,
+    });
+  }
+
+  _addOffer() {
+    const offer = {
+      id: 6,
+      url: this.state.img_url,
+      offer_title: this.state.title,
+      place: this.state.place,
+      category: this.state.category,
+    };
+
+    console.log(offer);
+
+    let action = {type: 'ADD_OFFER', value: offer};
+    this.props.dispatch(action);
+
+    setTimeout(() => {
+      this.props.navigation.navigate('My offers', {offer: offer});
+    }, 1000);
+
+    this._resetFields();
   }
 
   _selectPicture() {
@@ -74,38 +105,39 @@ class AddOfferScreen extends Component {
             style={styles.input}
             mode="outlined"
             selectionColor="#fc5c65"
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(text) => this.setState({title: text})}
             placeholder="Enter a title for your offer"
             placeholderTextColor="gray"
             label="Offer title"
             inlineImageLeft="username"
             inlineImagePadding={2}
+            value={this.state.title}
           />
           <TextInput
             style={styles.input}
             mode="outlined"
             selectionColor="#fc5c65"
             onTouchStart={() => Alert.alert('hey hey hey')}
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(text) => this.setState({place: text})}
             placeholder="Choose a localisation"
             placeholderTextColor="gray"
             label="Localisation"
+            value={this.state.place}
           />
           <TextInput
             style={styles.input}
             mode="outlined"
             selectionColor="#fc5c65"
-            onTouchStart={() => Alert.alert('hey hey hey')}
-            onChangeText={(text) => this.setState({text})}
+            onChangeText={(text) => this.setState({category: text})}
             placeholder="Choose a category"
             placeholderTextColor="gray"
             label="Category"
+            value={this.state.category}
           />
           <TextInput
             style={styles.input}
             mode="outlined"
             selectionColor="#fc5c65"
-            onTouchStart={() => Alert.alert('hey hey hey')}
             onChangeText={(text) => this.setState({text})}
             placeholder="Add a description"
             placeholderTextColor="gray"
@@ -120,7 +152,7 @@ class AddOfferScreen extends Component {
               alignSelf: 'stretch',
             }}>
             <TouchableOpacity
-              onPress={() => Alert.alert('hey!!')}
+              onPress={() => this._resetFields()}
               style={{paddingVertical: 10, paddingHorizontal: 12}}>
               <Text
                 style={{
@@ -133,10 +165,7 @@ class AddOfferScreen extends Component {
                 Reset
               </Text>
             </TouchableOpacity>
-            <DoneButton
-              onPress={() => Alert.alert('clickkiiing')}
-              title="Create offer"
-            />
+            <DoneButton onPress={() => this._addOffer()} title="Create offer" />
           </View>
         </ScrollView>
       </PaperProvider>
@@ -194,4 +223,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 });
-export default AddOfferScreen;
+const mapStatetoProps = (state) => {
+  return state.manageOffers;
+};
+export default connect(mapStatetoProps)(AddOfferScreen);
